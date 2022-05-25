@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _playerBody;
     private Vector3 _movementInput;
     private Vector2 _mouseInput;
+    private float xRot;
 
     [SerializeField]
     private Transform _playerCamera;
@@ -44,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayerCamera()
     {
+        xRot -= _movementInput.y * _sensetivity;
 
+        transform.Rotate(0f, _mouseInput.x * _sensetivity, 0f);
+        _playerCamera.transform.localRotation = Quaternion.Euler(xRot,0f,0f);
     }
 }
