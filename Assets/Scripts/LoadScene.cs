@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    [SerializeField] private int _sceneNum;
-
-    public void SceneLoad()
+    public void ReloadGame()
     {
-        SceneManager.LoadScene(_sceneNum);
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

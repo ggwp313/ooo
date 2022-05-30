@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4914140742710123654}
   - component: {fileID: 5986604865141862343}
   - component: {fileID: 6491418210075411220}
+  - component: {fileID: 3796315692732996911}
+  - component: {fileID: 8777494374026177894}
   - component: {fileID: 6720166533321151001}
   m_Layer: 0
   m_Name: Player
@@ -114,6 +116,32 @@ MonoBehaviour:
   _speed: 0
   _sensetivity: 0
   _jumpForce: 0
+--- !u!114 &3796315692732996911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606370351684028438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ed57a04d5c92347b600da1c2e626ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 5
+--- !u!114 &8777494374026177894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606370351684028438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f0be857c4e2cc4eb4e5cba053764f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverCanvas: {fileID: 0}
 --- !u!54 &6720166533321151001
 Rigidbody:
   m_ObjectHideFlags: 0
