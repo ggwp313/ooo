@@ -1,30 +1,33 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+namespace Enemy
 {
-	[SerializeField] private float hitPoints = 5f;
-
-	private bool isDead;
-
-	public bool IsDead()
+	public class EnemyHealth : MonoBehaviour
 	{
-		return isDead;
-	}
+		[SerializeField] private float hitPoints = 5f;
 
-	public void TakeDamage(float damage)
-	{
-		BroadcastMessage("OnDamageTaken");
-		hitPoints -= damage;
-		if (hitPoints <= 0)
+		private bool isDead;
+
+		public bool IsDead()
 		{
-			Die();
+			return isDead;
 		}
-	}
 
-	private void Die()
-	{
-		if (isDead) return;
-		isDead = true;
-		GetComponent<Animator>().SetTrigger("die");
+		public void TakeDamage(float damage)
+		{
+			BroadcastMessage("OnDamageTaken");
+			hitPoints -= damage;
+			if (hitPoints <= 0)
+			{
+				Die();
+			}
+		}
+
+		private void Die()
+		{
+			if (isDead) return;
+			isDead = true;
+			GetComponent<Animator>().SetTrigger("die");
+		}
 	}
 }

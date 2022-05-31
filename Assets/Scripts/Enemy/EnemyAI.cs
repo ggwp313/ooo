@@ -1,83 +1,86 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+namespace Enemy
 {
-    [SerializeField] private float chaseRange = 5f;
-    [SerializeField] private float turnSpeed = 5f;
-
-    private NavMeshAgent navMeshAgent;
-    private float distanceToTarget = Mathf.Infinity;
-    private bool isProvoked;
-    private EnemyHealth health;
-    private Transform target;
-
-    private void Awake()
+    public class EnemyAI : MonoBehaviour
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        health = GetComponent<EnemyHealth>();
-        target = FindObjectOfType<PlayerHealth>().transform;
-    }
+        [SerializeField] private float chaseRange = 5f;
+        [SerializeField] private float turnSpeed = 5f;
 
-    void Update()
-    {
-        if (health.IsDead())
+        private NavMeshAgent navMeshAgent;
+        private float distanceToTarget = Mathf.Infinity;
+        private bool isProvoked;
+        private EnemyHealth health;
+        private Transform target;
+
+        private void Awake()
         {
-            enabled = false;
-            navMeshAgent.enabled = false;
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<EnemyHealth>();
+            target = FindObjectOfType<PlayerHealth>().transform;
         }
-        distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (isProvoked)
+
+        void Update()
         {
-            EngageTarget();
+            if (health.IsDead())
+            {
+                enabled = false;
+                navMeshAgent.enabled = false;
+            }
+            distanceToTarget = Vector3.Distance(target.position, transform.position);
+            if (isProvoked)
+            {
+                EngageTarget();
+            }
+            else if (distanceToTarget <= chaseRange)
+            {
+                isProvoked = true;
+            }
         }
-        else if (distanceToTarget <= chaseRange)
+
+        public void OnDamageTaken()
         {
             isProvoked = true;
         }
-    }
 
-    public void OnDamageTaken()
-    {
-        isProvoked = true;
-    }
-
-    private void EngageTarget()
-    {
-        FaceTarget();
-        if (distanceToTarget >= navMeshAgent.stoppingDistance)
+        private void EngageTarget()
         {
-            ChaseTarget();
+            FaceTarget();
+            if (distanceToTarget >= navMeshAgent.stoppingDistance)
+            {
+                ChaseTarget();
+            }
+
+            if (distanceToTarget <= navMeshAgent.stoppingDistance)
+            {
+                AttackTarget();
+            }
         }
 
-        if (distanceToTarget <= navMeshAgent.stoppingDistance)
+        private void ChaseTarget()
         {
-            AttackTarget();
+            GetComponent<Animator>().SetBool("attack", false);
+            GetComponent<Animator>().SetTrigger("move");
+            navMeshAgent.SetDestination(target.position);
         }
-    }
 
-    private void ChaseTarget()
-    {
-        GetComponent<Animator>().SetBool("attack", false);
-        GetComponent<Animator>().SetTrigger("move");
-        navMeshAgent.SetDestination(target.position);
-    }
+        private void AttackTarget()
+        {
+            GetComponent<Animator>().SetBool("attack", true);
+        }
 
-    private void AttackTarget()
-    {
-        GetComponent<Animator>().SetBool("attack", true);
-    }
+        private void FaceTarget()
+        {
+            Vector3 direction = (target.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
+        }
 
-    private void FaceTarget()
-    {
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, chaseRange);
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, chaseRange);
+        }
     }
 }
