@@ -9,6 +9,12 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene(1);
         Time.timeScale = 1;
+        Cursor.visible = false;
+    }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void QuitGame()

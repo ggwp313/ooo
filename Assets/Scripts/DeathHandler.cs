@@ -1,4 +1,6 @@
 using UnityEngine;
+using StarterAssets;
+using Weapons;
 
 public class DeathHandler : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class DeathHandler : MonoBehaviour
 	{
 		gameOverCanvas.enabled = true;
 		Time.timeScale = 0;
+		FindObjectOfType<WeaponSwitcher>().enabled = false;
+		GetComponent<FirstPersonController>().enabled = false;
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 	}

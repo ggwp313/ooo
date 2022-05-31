@@ -10,11 +10,11 @@ namespace Enemy
 
         private NavMeshAgent navMeshAgent;
         private float distanceToTarget = Mathf.Infinity;
-        private bool isProvoked;
+        private bool isProvoked = false;
         private EnemyHealth health;
         private Transform target;
 
-        private void Awake()
+        void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<EnemyHealth>();
