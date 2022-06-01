@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         if (endOfGame)
         {
             endGameView.SetActive(true);
+            Cursor.visible = true;
         }
     }
 }

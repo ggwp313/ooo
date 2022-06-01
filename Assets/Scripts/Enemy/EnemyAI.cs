@@ -9,14 +9,16 @@ namespace Enemy
         [SerializeField] private float turnSpeed = 5f;
 
         private NavMeshAgent navMeshAgent;
+        private Collider collider;
         private float distanceToTarget = Mathf.Infinity;
         private bool isProvoked = false;
         private EnemyHealth health;
         private Transform target;
 
-        void Start()
+        void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            collider = GetComponent<Collider>();
             health = GetComponent<EnemyHealth>();
             target = FindObjectOfType<PlayerHealth>().transform;
         }
@@ -25,6 +27,7 @@ namespace Enemy
         {
             if (health.IsDead())
             {
+                collider.enabled = false;
                 enabled = false;
                 navMeshAgent.enabled = false;
             }

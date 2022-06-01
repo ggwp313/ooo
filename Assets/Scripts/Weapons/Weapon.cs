@@ -19,6 +19,7 @@ namespace Weapons
         [SerializeField] private float damage = 25f;
         [SerializeField] private float timeBetweenShoots = 2f;
         [SerializeField] private TextMeshProUGUI ammoText;
+        [SerializeField] private AudioSource audioSource;
 
         private bool canShoot = true;
 
@@ -32,6 +33,7 @@ namespace Weapons
             DisplayAmmo();
             if (Input.GetMouseButton(0) && canShoot)
             {
+                audioSource.Play();
                 StartCoroutine(Shoot());
             }
         }

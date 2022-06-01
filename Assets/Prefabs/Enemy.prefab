@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c09377b20687a4eb64d101437f1abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRange: 6
+  chaseRange: 10
   turnSpeed: 5
 --- !u!114 &7654183280217611929
 MonoBehaviour:
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce3bdd321fe4de40b5111f7c0bf4adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
 --- !u!114 &7654183280217611930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,12 +128,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Armature_Halloween'\n\tTransform 'LowerLeg_L'\n\tTransform
-    'LowerLeg_R'\n\tTransform 'Ankle_R'\n\tTransform 'UpperLeg_L'\n\tTransform 'IndexFinger_03'\n\tTransform
-    'Hand_L'\n\tTransform 'Hand_R'\n\tTransform 'Spine_02'\n\tTransform 'Ankle_L'\n\tand
-    more ...\n\tFrom animation clip 'Flying Back Death'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
